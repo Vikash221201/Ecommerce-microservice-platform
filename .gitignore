@@ -15,3 +15,15 @@
 # Logs
 *.log
 logs/
+.env.example
+docs/phase-10-security.md
+docs/phase-12-testing.md
+docs/phase-2-product-service.md
+docs/phase-3-postgresql.md
+docs/phase-4-cart-service.md
+docs/phase-5-order-service.md
+docs/phase-6-payment-service.md
+docs/phase-7-notification-service.md
+docs/phase-8-kafka.md
+docs/phase-9-gateway.md
+start.md
