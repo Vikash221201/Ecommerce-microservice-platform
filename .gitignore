@@ -1,0 +1,17 @@
+
+# Environment files containing passwords
+.env
+.env.*
+!.env.example
+
+# Java build output
+**/target/
+**/build/
+
+# IDE files
+.idea/
+*.iml
+
+# Logs
+*.log
+logs/

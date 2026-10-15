@@ -1,0 +1,35 @@
+server:
+  port: ${SERVER_PORT:8086}
+
+spring:
+  application:
+    name: payment-service
+  datasource:
+    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${PAYMENT_DB:payment_db}
+    username: ${DB_USER:postgres}
+    password: ${DB_PASSWORD:postgres}
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+    locations: classpath:db/migration
+
+services:
+  order-service:
+    url: ${ORDER_SERVICE_URL:http://order-service:8084}
+
+jwt:
+  secret: ${JWT_SECRET:change-this-super-secret-key-min-32-chars-long}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-details: always
+

@@ -1,0 +1,15 @@
+server:
+  port: 8082
+
+spring:
+  application:
+    name: product-service
+  data:
+    mongodb:
+      uri: mongodb://${MONGO_USER:mongo}:${MONGO_PASSWORD:mongo}@${MONGO_HOST:localhost}:27017/productdb?authSource=admin
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info

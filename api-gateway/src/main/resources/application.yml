@@ -1,0 +1,60 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      server:
+        webflux:
+          httpclient:
+            connect-timeout: 3000
+            response-timeout: 5s
+          globalcors:
+            cors-configurations:
+              '[/**]':
+                allowedOrigins: "*"
+                allowedMethods:
+                  - GET
+                  - POST
+                  - PUT
+                  - DELETE
+                  - OPTIONS
+                allowedHeaders: "*"
+          routes:
+            - id: user-service
+              uri: ${USER_SERVICE_URL:http://user-service:8081}
+              predicates:
+                - Path=/api/auth/**, /api/users/**
+            - id: product-service
+              uri: ${PRODUCT_SERVICE_URL:http://product-service:8082}
+              predicates:
+                - Path=/api/products/**
+            - id: cart-service
+              uri: ${CART_SERVICE_URL:http://cart-service:8083}
+              predicates:
+                - Path=/api/cart/**
+            - id: order-service
+              uri: ${ORDER_SERVICE_URL:http://order-service:8084}
+              predicates:
+                - Path=/api/orders/**
+            - id: notification-service
+              uri: ${NOTIFICATION_SERVICE_URL:http://notification-service:8085}
+              predicates:
+                - Path=/api/notifications/**
+            - id: payment-service
+              uri: ${PAYMENT_SERVICE_URL:http://payment-service:8086}
+              predicates:
+                - Path=/api/payments/**
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,gateway
+  endpoint:
+    health:
+      show-details: when_authorized
+jwt:
+  secret: ${JWT_SECRET:change-this-super-secret-key-min-32-chars-long}
